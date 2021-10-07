@@ -28,6 +28,18 @@ app.get("/quotes", (req, res) => {
 app.get("/quotes/random", (req, res) => {
   res.send(pickFromArray(quotes));
 })
+app.get("/quotes/search", (req, res)=> {
+  const term = req.query.term;
+  console.log(term);
+  const filterQuotes = quotes.filter(motivationQuote => {           
+    const quote = motivationQuote.quote
+    const author = motivationQuote.author
+    if(quote.includes(term) || author.includes(term)){
+      return motivationQuote;;
+  }
+})
+  res.send(filterQuotes)
+})
 //You can use this function to pick one element at random from a given array
 //example: pickFromArray([1,2,3,4]), or
 //example: pickFromArray(myContactsArray)
