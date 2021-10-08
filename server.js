@@ -1,4 +1,7 @@
 const { response } = require("express");
+const lodash = require('lodash');
+
+
 // server.js
 // This is where your node app starts
 
@@ -30,14 +33,13 @@ app.get("/quotes/random", (req, res) => {
 })
 app.get("/quotes/search", (req, res)=> {
   const term = req.query.term;
-  console.log(term);
   const filterQuotes = quotes.filter(motivationQuote => {           
     const quote = motivationQuote.quote
     const author = motivationQuote.author
-    if(quote.includes(term) || author.includes(term)){
-      return motivationQuote;;
-  }
-})
+    if(quote.toLowerCase().includes(term.toLowerCase()) || author.toLowerCase().includes(term.toLowerCase())){
+      return motivationQuote;
+  } 
+}) 
   res.send(filterQuotes)
 })
 //You can use this function to pick one element at random from a given array
